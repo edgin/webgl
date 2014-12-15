@@ -5,12 +5,21 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <canvas id="c"></canvas>
+    <canvas id="c" width='400' height="400"></canvas>
     <script>
         var c = document.getElementById('c');
         var gl = c.getContext('experimental-webgl');
-        gl.clearColor(0,0,0.8,1);
-        gl.clear(gl.COLOR_BUFFER_BIT);
+        //gl.clearColor(0,0,0.8,1);
+        //gl.clear(gl.COLOR_BUFFER_BIT);
+        var vertxPosBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexPosBuffer);
+        var vertices = [-0.5, -0.5, 0.5,-0.5,0,0.5];
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(veritces),gl.STATIC_DRAW);
+        
+        var vs = 'attribute vec2pos;' +
+                'void_main()  { gl_position = vec4(pos, 0, 1);}';
+        var fs = 'precision mediump float;' + 
+                'void_main() {gl_FragColor -vec4(0, 0.8,0,1);}';
     </script>
 </html>
 
